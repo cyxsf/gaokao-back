@@ -2,7 +2,7 @@
   <div class="login-page">
     <section class="form-container">
       <span class="title">高考志愿推荐后台管理系统</span>
-      <el-form class="login-form" ref="form" :model="form" label-width="80px">
+      <el-form class="login-form" ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="用户名">
           <el-input v-model="form.username"></el-input>
         </el-form-item>
@@ -29,6 +29,14 @@ export default {
       form: {
         username: '',
         password: ''
+      },
+      rules: {
+        username: [
+          {required: true, message: '请输入用户名', trigger: 'blur'}
+        ],
+        password: [
+          {required: true, message: '请输入密码', trigger: 'blur'}
+        ]
       },
       pwd: '',
       showPwd: false
