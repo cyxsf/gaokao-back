@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import axios from 'axios'
 import router from './router/router'
 import IconSvg from './components/icons/IconSvg'
 import ElementUI from 'element-ui'
@@ -9,6 +10,8 @@ import './theme/element/index.css'
 
 Vue.use(ElementUI)
 Vue.component('icon-svg', IconSvg)
+
+Vue.prototype.$axios = axios
 
 Vue.config.productionTip = false
 
