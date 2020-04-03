@@ -7,7 +7,7 @@ import VueAxios from 'vue-axios'
 import router from './router/router'
 import IconSvg from './components/icons/IconSvg'
 import ElementUI from 'element-ui'
-import './theme/element/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
 Vue.component('icon-svg', IconSvg)
