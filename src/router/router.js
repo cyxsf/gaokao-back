@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/pages/login'
 import Home from '@/pages/home'
 import Manage from '@/pages/manage'
-import Iden from '@/pages/identity'
+import IdenList from '@/pages/idenList'
 
 Vue.use(Router)
 
@@ -23,9 +23,13 @@ export default new Router({
         component: Home,
         meta: []
       }, {
-        path: '/iden',
-        component: Iden,
-        meta: ['数据管理', '身份认证']
+        path: '/userList',
+        component: IdenList,
+        meta: ['数据管理', '用户列表']
+      }, {
+        path: '/idenList',
+        component: IdenList,
+        meta: ['数据管理', '认证列表']
       }]
     }
   ]

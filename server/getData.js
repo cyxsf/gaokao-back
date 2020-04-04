@@ -1,8 +1,8 @@
 var express = require('express')
 var router = express.Router()
 
-var DBHelper = require('../DBHelper')
-var sql = require('../sqlMap')
+var DBHelper = require('./DBHelper')
+var sql = require('./sqlMap')
 
 // 用户注册
 router.post('/userReg', (req, res) => {
@@ -55,6 +55,20 @@ router.post('/userSelect', (req, res) => {
   let params = req.body
   let conn = new DBHelper().getConn()
   conn.query(sqlStr, [params.uid], (err, result) => {
+    if (err) {
+      res.json(err)
+    } else {
+      res.json(result)
+    }
+  })
+  // conn.end()
+})
+
+// 身份认证查找
+router.post('/idenSelect', (req, res) => {
+  let sqlStr = sql.data.select
+  let conn = new DBHelper().getConn()
+  conn.query(sqlStr, (err, result) => {
     if (err) {
       res.json(err)
     } else {

@@ -47,21 +47,21 @@ export default {
       let uid = this.form.username
       let pwd = this.form.password
       this.$refs[formName].validate((data) => {
-        this.axios.post('/api/user/userSelect', { // 判断是否存在该用户
+        this.axios.post('/api/data/userSelect', { // 判断是否存在该用户
           uid
         }).then(res => {
           if (res.data.length === 0) {
-            this.axios.post('/api/user/userReg', { // 不存在时自动进行注册
+            this.axios.post('/api/data/userReg', { // 不存在时自动进行注册
               uid, pwd
             }).then(res => {
               this.$message({
                 message: '恭喜你，登录成功',
                 type: 'success'
               })
-              this.$router.push('/home')
+              this.$router.push('manage')
             })
           } else {
-            this.axios.post('/api/user/userLogin', { // 判断用户名和密码是否输入正确
+            this.axios.post('/api/data/userLogin', { // 判断用户名和密码是否输入正确
               uid, pwd
             }).then(res => {
               if (res.data.length === 0) {
@@ -71,7 +71,7 @@ export default {
                   message: '恭喜你，登录成功',
                   type: 'success'
                 })
-                this.$router.push('/home')
+                this.$router.push('manage')
               }
             })
           }
@@ -100,7 +100,7 @@ export default {
   background: #ffffff;
   .icons {
   position: absolute;
-  right: 110px;
+  right: 120px;
   top: 135px;
   cursor: pointer;
   }

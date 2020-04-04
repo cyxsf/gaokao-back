@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-page">
     <head-top></head-top>
     <section class="data_section">
       <header class="section_title">数据统计</header>
