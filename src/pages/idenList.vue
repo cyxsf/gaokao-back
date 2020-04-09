@@ -26,14 +26,14 @@
               :total="count">
             </el-pagination>
         </div>
-        <el-dialog title="身份认证信息" :visible.sync="dialogFormVisible" width="300px">
+        <el-dialog title="身份认证信息" :visible.sync="dialogFormVisible" width="500px">
           <span class="dia">用户ID：{{iden.userid}}</span>
           <span class="dia">学校名称：{{iden.school}}</span>
           <span class="dia">专业名称：{{iden.major}}</span>
           <span class="dia">入学年份：{{iden.year}}</span>
           <div class="imgs">
-            <img  alt="" :src='iden.imgStr' class="user-header-com">
-            <img  alt="" :src='iden.imgStrs' class="user-header-com">
+            <img  alt="" :src='iden.imgStr' class="img">
+            <img  alt="" :src='iden.imgStrs' class="img">
           </div>
           <div slot="footer" class="dialog-footer" @click="exam">
             <el-button>不通过</el-button>
@@ -47,6 +47,7 @@
 <script>
 import headTop from '@/components/headTop'
 export default {
+  inject: ['reload'],
   data () {
     return {
       iden: {},
@@ -98,7 +99,39 @@ export default {
       this.offset = (val - 1) * this.limit
       this.initData()
     },
-    exam () {
+    exam (e) {
+      let target = e.target || e.srcElement
+      let uid = this.iden.userid
+      let school = this.iden.school
+      let major = this.iden.major
+      let year = this.iden.year
+      console.log(year)
+      if (target.innerHTML === '通过') {
+        this.axios.post('/api/data/upUser', {uid}) // 更新用户权限
+          .then((res) => {
+            console.log(res)
+          })
+        this.axios.post('/api/data/inSeni', { // 插入学长学姐
+          uid, school, major, year
+        }).then((res) => {
+          console.log(res)
+        })
+        let exam = 1
+        this.axios.post('/api/data/upIden', {exam, uid}) // 改变身份认证状态
+          .then((res) => {
+            console.log(res)
+          })
+        this.dialogFormVisible = false
+        this.reload()
+      } else {
+        let exam = 2
+        this.axios.post('/api/data/upIden', {exam, uid}) // 改变身份认证状态
+          .then((res) => {
+            console.log(res)
+          })
+        this.dialogFormVisible = false
+        this.reload()
+      }
     }
   }
 }
@@ -152,5 +185,10 @@ export default {
   width: 100%;
   display: block;
   margin: 8px 10px;
+}
+.img {
+  width: 200px;
+  margin: 10px;
+  border: 1px solid #20a0ff;
 }
 </style>

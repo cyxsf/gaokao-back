@@ -7,7 +7,10 @@ var sqlMap = {
     // select: 'select * from user where name like "%"?"%"'
   },
   data: {
-    select: 'select * from identity'
+    select: 'select * from identity where exam = 0',
+    upUser: 'update user set root = 2 where userid = ?',
+    inSeni: 'insert into seniors(userid,name,school,major,year) values (?,?,?,?,?)',
+    upIden: 'update identity set exam = ? where userid = ?'
   }
 }
 

@@ -78,4 +78,49 @@ router.post('/idenSelect', (req, res) => {
   // conn.end()
 })
 
+// 更新用户表
+router.post('/upUser', (req, res) => {
+  let sqlStr = sql.data.upUser
+  let params = req.body
+  let conn = new DBHelper().getConn()
+  conn.query(sqlStr, [params.uid], (err, result) => {
+    if (err) {
+      res.json(err)
+    } else {
+      res.json(result)
+    }
+  })
+  // conn.end()
+})
+
+// 插入学长学姐表
+router.post('/inSeni', (req, res) => {
+  let sqlStr = sql.data.inSeni
+  let params = req.body
+  let conn = new DBHelper().getConn()
+  conn.query(sqlStr, [params.uid, '', params.school, params.major, params.year], (err, result) => {
+    if (err) {
+      res.json(err)
+    } else {
+      res.json(result)
+    }
+  })
+  // conn.end()
+})
+
+// 删除身份认证表
+router.post('/upIden', (req, res) => {
+  let sqlStr = sql.data.upIden
+  let params = req.body
+  let conn = new DBHelper().getConn()
+  conn.query(sqlStr, [params.exam, params.uid], (err, result) => {
+    if (err) {
+      res.json(err)
+    } else {
+      res.json(result)
+    }
+  })
+  // conn.end()
+})
+
 module.exports = router

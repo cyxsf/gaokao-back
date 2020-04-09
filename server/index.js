@@ -14,6 +14,6 @@ app.use(bodyParser.json())
 app.use('/api/data', dataApi)
 
 // 监听端口
-server.listen(3000, () => {
-  console.log('success listen at port:3000......')
+server.listen(3030, () => {
+  console.log('success listen at port:3030......')
 })
